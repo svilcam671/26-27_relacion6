@@ -19,10 +19,10 @@ $barra=[
 //$usuario=getenv("MYSQL_USER");
 
 //dibuja la plantilla de la vista
-inicioCabecera("Mi Aplicacion");
+inicioCabecera("Tienda Sergio");
 cabecera();
 finCabecera();
-inicioCuerpo("2DAW APLICACION INDEX", $barra );
+inicioCuerpo("Tienda", $barra );
 cuerpo();  //llamo a la vista
 finCuerpo();
 // **********************************************************
@@ -43,7 +43,6 @@ function cuerpo()
 ?>
     <br><br>
     Hola, estás en Index.php
-    Pruebas Basicas 
-    <a href="../aplicacion/pruebas/index.php">Pruebas basicas</a>
+    
 <?php
 }
