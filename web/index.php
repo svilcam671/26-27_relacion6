@@ -43,6 +43,9 @@ function cuerpo()
 ?>
     <br><br>
     Hola, estás en Index.php
+    <?php 
+    
+    ?>
     
 <?php
 }
