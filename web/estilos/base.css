@@ -7,8 +7,8 @@ body {
 
 #documento{
     margin: 0 auto;
-    background-color: #8080ff;
-    width: 700px;
+    background-color: #8ee9bb;
+    width: 900px;
 }
 #cabecera{
     background-color: #14e737;
@@ -24,10 +24,69 @@ body {
     font-style: italic;
 }
 
+/*Estilos barra de ubicacion*/
+#barraUbicacion {
+    background-color: #f8f9fa;
+    padding: 10px 15px;
+    border-radius: 4px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    border: 1px solid #dee2e6;
+}
+
+#barraUbicacion a {
+    color: #0056b3;
+    text-decoration: none;
+}
+
+#barraUbicacion a:hover {
+    text-decoration: underline;
+}
+
+/*Estilos barra menu horizontal*/
+#barraMenu {
+    background-color: #f1f3f5;
+    padding: 8px 12px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+#barraMenu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 10px;
+}
+
+#barraMenu li {
+    display: inline-block;
+}
+
+#barraMenu a {
+    display: inline-block;
+    color: #333;
+    background-color: #e2e6ea;
+    padding: 6px 12px;
+    text-decoration: none;
+    border-radius: 3px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+#barraMenu a:hover {
+    background-color: #d6dbdf;
+}
+
+#imgInicio {
+    width: 15%;
+}
+
 .boton{
     background-color: blue;
     color:white;
-    border:thin black solid;
+    border:1px black solid;
 }
 
 .boton a{
@@ -67,9 +126,9 @@ body {
     
 }
 
-.tabla tr.impar{
+/**.tabla tr.impar{
     
-}
+}*/
 
 #pie{
     background-color: #81e714;
