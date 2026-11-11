@@ -1,7 +1,7 @@
 <?php
 
 include_once(RUTABASE . "/scripts/librerias/validacion.php");
-abstract class MuebleBase{
+abstract class muebleBase{
 
     // constante de clase, no se indica valor en la relacion pero pide inicializarla
     public const MAXIMO_MUEBLES = 20;
@@ -9,7 +9,7 @@ abstract class MuebleBase{
     // variable static que lleva la cuenta de muebles creados
     private static int $_mueblesCreados = 0;
 
-    // propiedades privada de la instancia
+    // propiedades privadas de la instancia
     private string $_nombre;
     private string $_fabricante;
     private string $_pais;
@@ -18,7 +18,20 @@ abstract class MuebleBase{
     private string $_fechaFinVenta;
     private float $_precio;
 
+    private caracteristicas $_caracteristicas;
 
+    /**
+     * Constructor que recibe los valores para crear los muebles. Salvo por el nombre, lo demas valores tendran un valor por defecto. Ademas solo se permitira crear un mueble si no se ha llegado al limite maximo
+     * indicado por la constante.
+     *
+     * @param string $nombre Cadena con el nombre del mueble, no puede estar vacio ni tener mas de 40 caracteres, si no se lanza una excepcion.
+     * @param string $fabricante Cadena con el fabricante, valor por defecto FaMu: y si no lo tiene se le añade a la cadena dada, ademas se recorta a 30 caracteres
+     * @param string $pais cadena con el pais, maximo 20 caracteres y valor por defecto ESPAÑA
+     * @param integer $anio numero entero comprendido entre 2020 y el año actual. Valor por defecto 2020.
+     * @param string $fechaIniVenta cadena con la fecha de inicio de venta que no puede ser anterior al 1 de enero del año de fabricacion, valor por defecto 01/01/2020
+     * @param string $fechaFinVenta cadena con la fecha de fin de venta que no puede ser anterior a la fecha de inicio de venta, valor por defecto 31/12/2040
+     * @param float $precio real con valor por defecto 30, no puede ser inferior a 30.
+     */
     public function __construct(string $nombre, string $fabricante = "FaMu:", string $pais = "ESPAÑA", int $anio = 2020, string $fechaIniVenta = "01/01/2020", string $fechaFinVenta = "31/12/2040", float $precio = 30){
         
         $num = 0;
@@ -54,9 +67,18 @@ abstract class MuebleBase{
             $this->setPrecio(30);
         }
 
+        $this->_caracteristicas = new caracteristicas();
+
         self::$_mueblesCreados++;
     }
 
+    /**
+     * Funcion para comprobar que se pueden crear mas muebles, devolvera true si se puede, false en caso contrario. Ademas en la variable pasada por referencia 
+     * se guardara el numero de muebles restantes que se pueden crear.
+     *
+     * @param integer $numero variable pasada por referencia donde se guardara el numero restante de muebles que se pueden crear
+     * @return boolean se devuelve true si se pueden crear mas muebles, false en caso contrario
+     */
     public static function puedeCrear(int &$numero): bool {
 
         $mueblesRestantes = self::MAXIMO_MUEBLES - self::$_mueblesCreados;
@@ -71,14 +93,49 @@ abstract class MuebleBase{
 
     }
 
+    /**
+     * Metodo que devolvera un array con el nombre de las propiedades adicionales a la clase base
+     *
+     * @return array
+     */
     abstract public function damePropiedadesAdicionales(): array;
 
+    /**
+     * Redefinicion de toString que devuelve una cadena con informacion del mueble
+     *
+     * @return string devuelve una cadena con informacion del mueble
+     */
     public function __toString(): string{
 
         return "MUEBLE de clase ".get_class($this)." con nombre ".$this->getNombre().", fabricante ".$this->getFabricante().", fabricado en ".$this->getPais().
-                " a partir del año ".$this->getAnio().", vendido desde ".$this->getFechaIniVenta()." hasta ".$this->getFechaFinVenta().", precio ".$this->getPrecio()."€";
+                " a partir del año ".$this->getAnio().", vendido desde ".$this->getFechaIniVenta()." hasta ".$this->getFechaFinVenta().", precio ".$this->getPrecio()."€, caracteristicas (".$this->_caracteristicas.")";
+    }
+
+
+    /**
+     * Metodo que recibe un array con parametros correspondientes al nombre de la caracteristica y el valor de esta y que la añade a la propiedad privada. Si la cantidad de argumentos es impar se descarta el ultimo.
+     *
+     * @param mixed ...$parametros array con pares de nombre y valor de propiedades
+     * @return void
+     */
+    public function anadirCaracteristicas(mixed ...$parametros):void {
+
+        for ($i = 0; $i + 1 < count($parametros); $i += 2 ) {
+
+            $nombre = $parametros[$i];
+            $valor = $parametros[$i+1];
+
+            $this->_caracteristicas->$nombre = $valor;
+
+        }
+
+    }
+
+    public function getCaracteristicas(): caracteristicas {
+        return $this->_caracteristicas;
     }
  
+    // Metodos getter y setter para obtener el valor y establecerlo en las propiedades
     public function getNombre(): string {
         
         return $this->_nombre;
@@ -206,24 +263,6 @@ abstract class MuebleBase{
 
         return $correcto;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     /**
