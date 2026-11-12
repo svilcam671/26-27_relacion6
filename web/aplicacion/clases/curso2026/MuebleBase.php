@@ -125,8 +125,10 @@ abstract class muebleBase{
             $nombre = $parametros[$i];
             $valor = $parametros[$i+1];
 
-            $this->_caracteristicas->$nombre = $valor;
-
+            if (is_string($nombre) && $nombre !== "") {
+                $this->_caracteristicas->$nombre = $valor;
+            }
+            
         }
 
     }

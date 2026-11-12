@@ -44,7 +44,7 @@ final class muebleReciclado extends muebleBase {
      * @return string devuelve una cadena con informacion del mueble
      */
     public function __toString(): string{
-        return parent::__toString().", porcentaje de reciclado ".$this->getPorcentajeReciclado();
+        return parent::__toString().", porcentaje de reciclado ".$this->getPorcentajeReciclado()."%";
     }
 
     // Metodos getter y setter para obtener el valor y establecerlo en las propiedades
