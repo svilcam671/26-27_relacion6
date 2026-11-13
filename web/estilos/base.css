@@ -150,3 +150,12 @@ body {
     border:thin solid red;
     padding:5px;
 }
+
+table, table tr, table td, table th {
+
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 10px;
+    text-align: center;
+}
+
