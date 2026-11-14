@@ -1,4 +1,8 @@
 <?php
+// uso header con Location para redireccionar al index.php que esta en /aplicacion/principal
+header("Location: /aplicacion/principal/index.php");
+exit;
+
 include_once(dirname(__FILE__) . "/cabecera.php");
 //controlador
 $barra=[
@@ -43,6 +47,9 @@ function cuerpo()
 ?>
     <br><br>
     Hola, estás en Index.php
+    <?php 
+    
+    ?>
     
 <?php
 }
