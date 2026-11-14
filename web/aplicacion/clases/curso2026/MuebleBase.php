@@ -98,7 +98,9 @@ abstract class muebleBase{
      *
      * @return array
      */
-    abstract public function damePropiedadesAdicionales(): array;
+    public function damePropiedadesAdicionales(): array {
+        return [];
+    }
 
     /**
      * Redefinicion de toString que devuelve una cadena con informacion del mueble

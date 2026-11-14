@@ -1,4 +1,5 @@
 <?php
+// uso header con Location para redireccionar al index.php que esta en /aplicacion/principal
 header("Location: /aplicacion/principal/index.php");
 exit;
 

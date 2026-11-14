@@ -75,10 +75,10 @@ class caracteristicas implements Iterator {
                 $valor = $valor?"true":"false";
             }
 
-            $partes[] = $nombre.":".$valor;
+            $partes[] = $nombre.": ".$valor;
         }
 
-        return implode(";",$partes);
+        return implode(" | ",$partes);
 
     }
 

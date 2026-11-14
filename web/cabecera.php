@@ -29,6 +29,8 @@ spl_autoload_register(function ($clase){
 include(RUTABASE."/aplicacion/plantilla/plantilla.php");
 
 //creo todos los objetos que necesita mi aplicación
+
+//array con muebles
 $muebles = [
     1 => new muebleReciclado("Armario", "Ikea", "Suecia", 2021, "01/03/2021", "31/12/2030", 450, 60),
     2 => new muebleReciclado("Mesa", "MasMuebles", "Italia", 2024, "06/06/2026", "05/05/2035", 220, 20),
@@ -37,8 +39,9 @@ $muebles = [
     5 => new muebleTradicional("Comoda","Hiklin","China",2024,"02/05/2024","01/01/2029",343.99,120,"HK1"),
 ];
 
-$muebles[1]->anadirCaracteristicas("puertas",2,"color","marron");
-$muebles[2]->anadirCaracteristicas("patas",4,"forma","redonda");
-$muebles[3]->anadirCaracteristicas("cajones",3,"espejoIncluido",true);
-$muebles[4]->anadirCaracteristicas("material", "madera","cojin","blando");
-$muebles[5]->anadirCaracteristicas("alto",1, "ancho", 1.2);
+// añado dos caracteristicas a cada mueble
+$muebles[1]->anadirCaracteristicas("Puertas",2,"Color","marron");
+$muebles[2]->anadirCaracteristicas("Patas",4,"Forma","redonda");
+$muebles[3]->anadirCaracteristicas("Cajones",3,"Espejo",true);
+$muebles[4]->anadirCaracteristicas("Material", "madera","Cojin","blando");
+$muebles[5]->anadirCaracteristicas("Alto",1, "Ancho", 1.2);
