@@ -66,7 +66,7 @@ class caracteristicas implements Iterator {
      *
      * @return string devuelve una cadena con formato car1:valor1;car2:valor2;……
      */
-    public function __toString(){
+    public function __toString(): string{
 
         $partes=[];
         foreach ($this->_caracteristicas as $nombre => $valor) {
@@ -78,7 +78,7 @@ class caracteristicas implements Iterator {
             $partes[] = $nombre.": ".$valor;
         }
 
-        return implode(" | ",$partes);
+        return implode("; ",$partes);
 
     }
 

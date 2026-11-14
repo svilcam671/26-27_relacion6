@@ -86,7 +86,7 @@ if ($id > 0) {
         }
         $aux->setFabricante($datos["fabricante"]);
 
-        if (validaEntero($datos["anio"], 2020, intval(date("Y")), 2020)) {
+        if (is_numeric($datos["anio"]) && validaEntero($datos["anio"], 2020, intval(date("Y")), 2020)) {
 
             $datos["anio"] = intval($datos["anio"]);
 
