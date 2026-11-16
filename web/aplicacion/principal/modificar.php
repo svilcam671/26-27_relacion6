@@ -47,6 +47,7 @@ if ($id > 0) {
         "iniVenta" => "",
         "finVenta" => "",
         "precio" => "",
+        "material" => "",
     );
 
     foreach ($muebles[$id]->damePropiedadesAdicionales() as $clave) {
@@ -106,6 +107,12 @@ if ($id > 0) {
             $errores["precio"] = "Precio indicado no valido.";
         }
 
+        if (!(is_numeric($datos["material"]) && (intval($datos["material"])%5 === 0))) {
+            $errores["material"] = "Material no valido";
+        }
+
+        
+
         // si no hay errores actualizo los datos del mueble con los datos guardados
         if (count($errores) === 0) {
 
@@ -116,6 +123,7 @@ if ($id > 0) {
             $muebles[$id]->setFechaIniVenta($datos["iniVenta"]);
             $muebles[$id]->setFechaFinVenta($datos["finVenta"]);
             $muebles[$id]->setPrecio(floatval($datos["precio"]));
+            $muebles[$id]->setMaterial(intval($datos["material"]));
 
             if (get_class($muebles[$id]) === "muebleReciclado") {
                 $muebles[$id]->setPorcentajeReciclado(intval($datos["PorcentajeReciclado"]));
@@ -230,7 +238,15 @@ function formulario(array $muebles, int $id) {
 
 
             <?php } ?>
-            <br>
+            <select name="material" id="material">
+                <option value="5">Madera</option>
+                <option value="10">Hierro</option>
+                <option value="15">Plastico</option>
+                <option value="20">Cristal</option>
+            </select>
+            <br><br>
+
+
             <!-- Boton para guardar el formulario-->
             <input type="submit" name="guardar" value="Guardar cambios">
             <br>
@@ -257,6 +273,7 @@ function resumen(array $muebles, int $id){
     echo "<br>Fecha de inicio de venta: " . $muebles[$id]->getFechaIniVenta();
     echo "<br>Fecha de fin de venta: " . $muebles[$id]->getFechaFinVenta();
     echo "<br>Precio: " . $muebles[$id]->getPrecio() . "€";
+    echo "<br>Material: ".$muebles[$id]->getMaterial();
 
     foreach ($muebles[$id]->damePropiedadesAdicionales() as $clave) {
 

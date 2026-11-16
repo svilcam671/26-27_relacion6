@@ -63,6 +63,7 @@ function cuerpo(array $muebles, int $elegido, string $error) {
                 <th>INICIO VENTA</th>
                 <th>FIN VENTA</th>
                 <th>PRECIO</th>
+                <th>MATERIAL</th>
             </tr>
         </thead>
         <tbody>
@@ -78,6 +79,7 @@ function cuerpo(array $muebles, int $elegido, string $error) {
                 <td><?php echo $muebles[$i]->getFechaIniVenta()?></td>
                 <td><?php echo $muebles[$i]->getFechaFinVenta()?></td>
                 <td><?php echo $muebles[$i]->getPrecio()." €"; ?></td>
+                <td><?php echo $muebles[$i]->getMaterial()?></td>
             </tr>
     <?php } ?>
         </tbody>
@@ -112,6 +114,7 @@ function cuerpo(array $muebles, int $elegido, string $error) {
             echo "<br>Fecha de inicio de venta: ".$muebles[$elegido]->getFechaIniVenta();
             echo "<br>Fecha de fin de venta: ".$muebles[$elegido]->getFechaFinVenta();
             echo "<br>Precio: ".$muebles[$elegido]->getPrecio()."€";
+            echo "<br>Material: ".$muebles[$elegido]->getMaterial();
 
             foreach ($muebles[$elegido]->damePropiedadesAdicionales() as $clave ) {
 

@@ -11,13 +11,21 @@ class caracteristicas implements Iterator {
     // indica la posicion para el iterator
     private int $_posicion = 0;
 
+    private string $_secuencia;
+
     /**
      * Implementacion de current de iterator que devuelve el valor de la clave de la posicion actual de caracteristicas
      *
      * @return mixed
      */
     public function current(): mixed {
-        return $this->_caracteristicas[$this->_claves[$this->_posicion]];
+        if ($this->_posicion === 0) {
+            return $this->_secuencia;
+        }
+        else {
+            return $this->_caracteristicas[$this->_claves[$this->_posicion]];
+        }
+        
     }
 
     /**
@@ -97,7 +105,10 @@ class caracteristicas implements Iterator {
             throw new Exception("No se puede añadir la caracteristica $name porque ya se añadio ULTIMA");
         }
 
-        $this->_caracteristicas[$name] = $value;
+        if (!$name === "numero_serie") {
+            $this->_caracteristicas[$name] = $value;
+        }
+
     }
 
     /**
@@ -112,7 +123,19 @@ class caracteristicas implements Iterator {
             throw new Exception("La caracteristica $name no existe.");
         }
 
-        return $this->_caracteristicas[$name];
+        if ($name === "numero_serie") {
+
+            $secuencia = "";
+            for ($i = 0; $i < 15; $i++) {
+                $secuencia.=rand(0,9);
+            }
+
+            return $this->_secuencia = $secuencia;
+        }
+        else {
+            return $this->_caracteristicas[$name];
+        }
+
     }
 
     /**

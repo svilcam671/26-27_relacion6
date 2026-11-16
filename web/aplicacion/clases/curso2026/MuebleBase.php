@@ -17,6 +17,7 @@ abstract class muebleBase{
     private string $_fechaIniVenta;
     private string $_fechaFinVenta;
     private float $_precio;
+    private Materiales $_material;
 
     private caracteristicas $_caracteristicas;
 
@@ -31,10 +32,13 @@ abstract class muebleBase{
      * @param string $fechaIniVenta cadena con la fecha de inicio de venta que no puede ser anterior al 1 de enero del año de fabricacion, valor por defecto 01/01/2020
      * @param string $fechaFinVenta cadena con la fecha de fin de venta que no puede ser anterior a la fecha de inicio de venta, valor por defecto 31/12/2040
      * @param float $precio real con valor por defecto 30, no puede ser inferior a 30.
+     * @param int $material recibe un valor int como argumento y si existe el material con ese valor se asigna el material, por defecto se asigna el material de valor 10
      */
-    public function __construct(string $nombre, string $fabricante = "FaMu:", string $pais = "ESPAÑA", int $anio = 2020, string $fechaIniVenta = "01/01/2020", string $fechaFinVenta = "31/12/2040", float $precio = 30){
+    public function __construct(string $nombre, string $fabricante = "FaMu:", string $pais = "ESPAÑA", int $anio = 2020, 
+                                string $fechaIniVenta = "01/01/2020", string $fechaFinVenta = "31/12/2040", float $precio = 30, int $material=10){
         
         $num = 0;
+
         if (!self::puedeCrear($num)) {
             throw new Exception("No se pueden crear mas muebles, se ha llegado al limite.");
         }
@@ -65,6 +69,10 @@ abstract class muebleBase{
 
         if (!$this->setPrecio($precio)) {
             $this->setPrecio(30);
+        }
+
+        if (!$this->setMaterial($material)) {
+            $this->setMaterial(10);
         }
 
         $this->_caracteristicas = new caracteristicas();
@@ -110,7 +118,7 @@ abstract class muebleBase{
     public function __toString(): string{
 
         return "MUEBLE de clase ".get_class($this)." con nombre ".$this->getNombre().", fabricante ".$this->getFabricante().", fabricado en ".$this->getPais().
-                " a partir del año ".$this->getAnio().", vendido desde ".$this->getFechaIniVenta()." hasta ".$this->getFechaFinVenta().", precio ".$this->getPrecio()."€, caracteristicas (".$this->_caracteristicas.")";
+                " a partir del año ".$this->getAnio().", vendido desde ".$this->getFechaIniVenta()." hasta ".$this->getFechaFinVenta().", precio ".$this->getPrecio()."€, ".$this->getMaterialDescripcion().", ". "caracteristicas (".$this->_caracteristicas.")";
     }
 
 
@@ -135,11 +143,39 @@ abstract class muebleBase{
 
     }
 
+    /**
+     * Metodo get que devuelve una cadena con la descripcion del material
+     *
+     * @return string devuelve la cadena " de material" con el material correspondiente
+     */
+    public function getMaterialDescripcion(): string {
+
+        return " de material ".$this->getMaterial();
+    }
+
     public function getCaracteristicas(): caracteristicas {
         return $this->_caracteristicas;
     }
  
     // Metodos getter y setter para obtener el valor y establecerlo en las propiedades
+    public function getMaterial(): string {
+        
+        return $this->_material->descripcion();
+    }
+
+    public function setMaterial(int $_material): bool {
+
+        if (Materiales::from($_material)) {
+            $this->_material = Materiales::from($_material);
+
+            return true;
+        }
+        else {
+            return false;
+        }
+        
+    }
+    
     public function getNombre(): string {
         
         return $this->_nombre;
